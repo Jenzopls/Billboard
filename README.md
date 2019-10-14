@@ -19,5 +19,5 @@ bom izkopal s strani https://www.billboard.com/charts/hot-100, prek katere želi
 - Kolikšen odstotek izvajalcev se na lestvici pojavi z dvema različnima pesmima ali več?
 - Ali moški izvajalci pogosteje zasedajo prvih deset mest na lestvici od izvajalk?
 
-Analiziral bom torej deset najbolj priljubljenih pesmi vsakega tedna preteklega leta,
+V analizo bom vključil po deset najbolj priljubljenih pesmi vsakega tedna preteklega leta,
 sodeč po billboardu. Upajmo, da kaj uspe. 
