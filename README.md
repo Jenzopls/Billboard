@@ -15,7 +15,6 @@ Vse potrebne podatke:
 bom izkopal s strani https://www.billboard.com/charts/hot-100, prek katere želim izvedeti naslednje:
 
 - Je število črk oz. besed v naslovu pesmi odvisno od nje popularnosti?
-- Koliko tednov se pesem v povprečju obdrži na Billboardovi lestvici 100 največjih hitov?
 - Kolikšen odstotek izvajalcev se na lestvici pojavi z dvema različnima pesmima ali več?
 - Ali moški izvajalci pogosteje zasedajo prvih deset mest na lestvici od izvajalk?
 
