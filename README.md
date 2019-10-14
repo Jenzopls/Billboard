@@ -11,6 +11,7 @@ Vse potrebne podatke:
 - naslov pesmi, 
 - število tednov na lestvici, 
 - najvišje mesto pesmi na lestvici 
+
 bom izkopal s strani https://www.billboard.com/charts/hot-100, prek katere želim izvedeti naslednje:
 
 - Je število črk oz. besed v naslovu pesmi odvisno od nje popularnosti?
