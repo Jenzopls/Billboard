@@ -23,7 +23,7 @@ sodeč po billboardu. Upajmo, da kaj uspe.
 
 # Zbrani podatki
 V datoteki billboard_csv je zbranih vseh nekaj tisoč vročih hitov prejšnjega leta. Poleg naslova pesmi in imena izvajalca je razvidno tudi mesto na lestvici v določenem tednu, najvišje doseženo mesto in število tednov, ki ga je pesem že preživela na lestvici. Tej datoteki dela družbo tudi json datoteka z istimi podatki. Če ne drugega zato, ker zgleda precej lepo.
-Podatke sem si nekega hladnega novembrskega jutra priskrbel z "billboard_zajemanje_podatkov", v pomoč pa so mi prišla tudi "orodja.py", katera sem s pridom uporabil. Obe se tudi nahajata v repozitoriju. Zaenkrat je to od mene vse, do takrat pa... 
+Podatke sem si nekega hladnega novembrskega jutra priskrbel z "zajemanje_strani_billboard", v pomoč pa so mi prišla tudi "orodja.py", katera sem s pridom uporabil. Zaenkrat je to od mene vse, do takrat pa... 
 
 
 ...bomo videli.
