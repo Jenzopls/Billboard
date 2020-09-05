@@ -11,9 +11,9 @@ vzorec = (
     r'\s+'
     r'<span.*>'
     r'\s+'
-    r'<span class="chart-element__information__song text--truncate color--primary">(?P<naslov_pesmi>.+)</span>'
+    r'<span class="chart-element__information__song text--truncate color--primary">(?P<naslov>.+)</span>'
     r'\s+'
-    r'<span class="chart-element__information__artist text--truncate color--secondary">(?P<ime_izvajalca>.+)</span>'
+    r'<span class="chart-element__information__artist text--truncate color--secondary">(?P<izvajalec>.+)</span>'
     r'\s+'
     r'<.+>'
     r'\s+'
@@ -33,12 +33,17 @@ def vse_sobote_v_letu(year):
       yield d
       d += timedelta(days = 7)
 
+
 #for sobota in vse_sobote_v_letu(2018):
 #   url = f'https://www.billboard.com/charts/hot-100/{sobota}'
 #   ime_datoteke = f'billboard_{sobota}'
 #   o.shrani_spletno_stran(url, ime_datoteke)
 
+#def na_izvajalce(niz):
+#    return [izvajalec.strip() for izvajalec in re.split(',|Featuring|&',niz)]
+#
 pesmi = list()
+izvajalci = list()
 
 for sobota in vse_sobote_v_letu(2018):
    datoteka = f'billboard_{sobota}'
@@ -50,25 +55,26 @@ for sobota in vse_sobote_v_letu(2018):
       dictzadetek['mesto_na_lestvici'] = int(dictzadetek['mesto_na_lestvici'])
       dictzadetek['najvišje_mesto'] = int(dictzadetek['najvišje_mesto'])
       dictzadetek['tednov_na_lestvici'] = int(dictzadetek['tednov_na_lestvici'])
-      dictzadetek['feat'] = ('Featuring' in dictzadetek['ime_izvajalca'])
-      dictzadetek['st_besed'] = dictzadetek['naslov_pesmi'].count(' ') + 1
-      if [dictzadetek['naslov_pesmi'],dictzadetek['ime_izvajalca']] not in [[videna['naslov_pesmi'],videna['ime_izvajalca']] for videna in pesmi]:
+      if [dictzadetek['naslov'],dictzadetek['izvajalec']] not in [[videna['naslov'],videna['izvajalec']] for videna in pesmi]:
          videna = dictzadetek
          videna['id'] = len(pesmi)
          videna['tednov'] = 1
          videna['povp_mesto'] = videna['mesto_na_lestvici']
+         videna['feat'] = ('Featuring' in videna['izvajalec']) or (',' in videna['izvajalec']) or ('&' in videna['izvajalec'])
          pesmi.append(videna)
+         #for izvajalec in na_izvajalce(dictzadetek['ime_izvajalca']):
+         #   videna_izvajalec = videna
+         #   videna_izvajalec['ime_izvajalca'] = izvajalec
+         #   izvajalci.append(videna_izvajalec)
       else:
          for videna in pesmi:
-            if [dictzadetek['naslov_pesmi'],dictzadetek['ime_izvajalca']] == [videna['naslov_pesmi'],videna['ime_izvajalca']]:
+            if [dictzadetek['naslov'],dictzadetek['izvajalec']] == [videna['naslov'],videna['izvajalec']]:
                videna['tednov_na_lestvici'] = max(videna['tednov_na_lestvici'],dictzadetek['tednov_na_lestvici'])
-               videna['najvišje_mesto'] = max(videna['najvišje_mesto'],dictzadetek['najvišje_mesto'])
+               videna['najvišje_mesto'] = min(videna['najvišje_mesto'],dictzadetek['najvišje_mesto'])
                videna['povp_mesto'] = (videna['povp_mesto']*videna['tednov'] + dictzadetek['mesto_na_lestvici'])/(videna['tednov'] + 1)
                videna['tednov'] += 1
 
 
-
-
-o.zapisi_csv(pesmi,['id','mesto_na_lestvici','ime_izvajalca','naslov_pesmi','tednov_na_lestvici','najvišje_mesto','tednov','povp_mesto','feat','st_besed'],'videne.csv')
-#o.zapisi_json(pesmi,'billboard.json')
-#o.zapisi_csv(pesmi,['id','mesto_na_lestvici','naslov_pesmi','ime_izvajalca','najvišje_mesto','tednov_na_lestvici'],'billboard.csv')
+o.zapisi_csv(pesmi,['id','mesto_na_lestvici','izvajalec','naslov','tednov_na_lestvici','najvišje_mesto','tednov','povp_mesto','feat'],'billboard.csv')
+o.zapisi_json(pesmi,'billboard.json')
+#o.zapisi_csv(izvajalci,['id','mesto_na_lestvici','ime_izvajalca','naslov_pesmi','tednov_na_lestvici','najvišje_mesto','tednov','povp_mesto'],'izvajalci.csv')
