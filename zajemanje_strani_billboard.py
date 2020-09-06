@@ -34,16 +34,13 @@ def vse_sobote_v_letu(year):
       d += timedelta(days = 7)
 
 
-#for sobota in vse_sobote_v_letu(2018):
-#   url = f'https://www.billboard.com/charts/hot-100/{sobota}'
-#   ime_datoteke = f'billboard_{sobota}'
-#   o.shrani_spletno_stran(url, ime_datoteke)
+for sobota in vse_sobote_v_letu(2018):
+   url = f'https://www.billboard.com/charts/hot-100/{sobota}'
+   ime_datoteke = f'billboard_{sobota}'
+   o.shrani_spletno_stran(url, ime_datoteke)
 
-#def na_izvajalce(niz):
-#    return [izvajalec.strip() for izvajalec in re.split(',|Featuring|&',niz)]
-#
+
 pesmi = list()
-izvajalci = list()
 
 for sobota in vse_sobote_v_letu(2018):
    datoteka = f'billboard_{sobota}'
@@ -62,10 +59,6 @@ for sobota in vse_sobote_v_letu(2018):
          videna['povp_mesto'] = videna['mesto_na_lestvici']
          videna['feat'] = ('Featuring' in videna['izvajalec']) or (',' in videna['izvajalec']) or ('&' in videna['izvajalec'])
          pesmi.append(videna)
-         #for izvajalec in na_izvajalce(dictzadetek['ime_izvajalca']):
-         #   videna_izvajalec = videna
-         #   videna_izvajalec['ime_izvajalca'] = izvajalec
-         #   izvajalci.append(videna_izvajalec)
       else:
          for videna in pesmi:
             if [dictzadetek['naslov'],dictzadetek['izvajalec']] == [videna['naslov'],videna['izvajalec']]:
@@ -77,4 +70,3 @@ for sobota in vse_sobote_v_letu(2018):
 
 o.zapisi_csv(pesmi,['id','mesto_na_lestvici','izvajalec','naslov','tednov_na_lestvici','najvišje_mesto','tednov','povp_mesto','feat'],'billboard.csv')
 o.zapisi_json(pesmi,'billboard.json')
-#o.zapisi_csv(izvajalci,['id','mesto_na_lestvici','ime_izvajalca','naslov_pesmi','tednov_na_lestvici','najvišje_mesto','tednov','povp_mesto'],'izvajalci.csv')
